@@ -50,7 +50,7 @@
                 </div>
                 <div class="login-text">
                     <div class="login-text-center" style="font-size: 16px">
-                        <span style="color: #606060">已有账户？</span><a href="${ctx}/toLoginPage" style="color: #ff5e5e;cursor:pointer;">立即登录</a>
+                        <span style="color: #606060">已有账户？</span><a href="${ctx}/user/login" style="color: #ff5e5e;cursor:pointer;">立即登录</a>
                     </div>
                 </div>
             </div>

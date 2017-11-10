@@ -93,7 +93,7 @@ $("#register").click(function () {
         dataType: "json",
         success: function (data) {
             if (data.code == 200) {
-                window.location.href = ctx + "/user/toLoginPage";
+                window.location.href = ctx + "/user/userLogin"+"?phone="+phone+"&password="+password;
             } else {
                 layer.tips(data.msg, "#register");
             }

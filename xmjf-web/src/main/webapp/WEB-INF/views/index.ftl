@@ -24,7 +24,7 @@
         </a>
         <div class="header_nav" id="indexNav">
             <a href="${ctx}/index?0?0" class="header_nav_active">首页</a>
-            <a href="${ctx}/basItem/investmentList">我要投资</a>
+            <a href="${ctx}/basItem/basItemListPage">我要投资</a>
             <a href="${ctx}/security?0?2">安全保障</a>
             <a href="${ctx}/account/toAccountPage">我的账户</a>
             <a href="${ctx}/introduce?0?4">关于我们</a>
@@ -53,8 +53,8 @@
             </div>
         <#else>
             <div id="noUserId" style="width:142px;float: right">
-                <a href="${ctx}/user/toLoginPage"><input class='btn register' id='loginPage' type="button" value="登录"></a>
-                <a href="${ctx}/user/toRegisterPage"><input class='btn register' id='registerPage' type="button" value="注册"></a>
+                <a href="${ctx}/user/login"><input class='btn register' id='loginPage' type="button" value="登录"></a>
+                <a href="${ctx}/user/register"><input class='btn register' id='registerPage' type="button" value="注册"></a>
             </div>
         </#if>
         </div>

@@ -1,10 +1,14 @@
 package cn.hexg.xm.web.controller;
 
 import cn.hexg.xm.constant.P2pConstant;
+import cn.hexg.xm.db.dao.IBasUserDao;
 import cn.hexg.xm.exceptions.ParamsExcetion;
 import cn.hexg.xm.model.ResultInfo;
+import cn.hexg.xm.po.BasUser;
 import cn.hexg.xm.service.IBasUserService;
+import cn.hexg.xm.service.impl.BasUserServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,9 +58,9 @@ public class UserController extends BaseController {
 
         //进行验证手机验证码
         //手机验证码发送的时间
-        Date sessionDate = (Date) session.getAttribute(P2pConstant.PHONE_VERIFY_CODE_EXPIR_TIME+phone);
+        Date sessionDate = (Date) session.getAttribute(P2pConstant.PHONE_VERIFY_CODE_EXPIR_TIME + phone);
         //手机验证码
-        String sessionMobileCode = (String) session.getAttribute(P2pConstant.PHONE_VERIFY_CODE+phone);
+        String sessionMobileCode = (String) session.getAttribute(P2pConstant.PHONE_VERIFY_CODE + phone);
 
         if (null != sessionDate && null != sessionMobileCode) {
             //时间单位是秒了/1000
@@ -88,9 +92,12 @@ public class UserController extends BaseController {
         return resultInfo;
     }
 
-    @RequestMapping("toLoginPage")
-    public String toLoginPage(){
-        return "index";
+    @RequestMapping("userLogin")
+    @ResponseBody
+    public ResultInfo userLogin(String phone, String password, HttpSession session) {
+        BasUser basUser = basUserService.userLogin(phone,password);
+        session.setAttribute("user", basUser);
+        return success("用户登录成功！");
     }
 
 }

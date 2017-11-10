@@ -18,20 +18,33 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="cn.hexg.xm.po" targetProject="E:/idealCode/xmjf-par/xmjf-server/src/main/java">
+        <javaModelGenerator targetPackage="cn.hexg.xm.po" targetProject="E:/idealCode/myxmjf-par/xmjf-server/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!--生成映射文件存放位置-->
-        <sqlMapGenerator targetPackage="cn.hexg.xm.db.mappers" targetProject="E:/idealCode/xmjf-par/xmjf-server/src/main/java">
+        <sqlMapGenerator targetPackage="cn.hexg.xm.db.mappers" targetProject="E:/idealCode/myxmjf-par/xmjf-server/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!--生成Dao类存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.hexg.xm.db.dao" targetProject="E:/idealCode/xmjf-par/xmjf-server/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.hexg.xm.db.dao" targetProject="E:/idealCode/myxmjf-par/xmjf-server/src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="bas_user" domainObjectName="BasUser" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+       <!-- <table tableName="bas_user_info" domainObjectName="BasUserInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="bas_user_security" domainObjectName="BasUserSecurity" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="bus_account" domainObjectName="BusAccount" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="bus_user_integral" domainObjectName="BusUserIntegral" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="bus_income_stat" domainObjectName="BusIncomeStat" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="bus_user_stat" domainObjectName="BusUserStat" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="bas_experienced_gold" domainObjectName="BasExperiencedGold" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="sys_app_settings" domainObjectName="SysAppSettings" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+       -->
+        <table tableName="bas_item" domainObjectName="BasItem" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
+
+
     </context>
 </generatorConfiguration>
 

@@ -1,19 +1,23 @@
 package cn.hexg.xm.base;
 
 public class BaseQuery {
-	private Integer page=1;
-	private Integer rows=10;
-	public Integer getPage() {
-		return page;
+	private Integer pageNum=1;
+	private Integer pageSize=10;
+
+	public Integer getPageNum() {
+		return pageNum;
 	}
-	public void setPage(Integer page) {
-		this.page = page;
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
 	}
-	public Integer getRows() {
-		return rows;
+
+	public Integer getPageSize() {
+		return pageSize;
 	}
-	public void setRows(Integer rows) {
-		this.rows = rows;
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 	
 

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/common.css">
     <script type="text/javascript" src="${ctx}/js/assets/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="${ctx}/js/layer/layer.js"></script>
+    <script type="text/javascript" src="${ctx}/js/common.js"></script>
+    <script type="text/javascript" src="${ctx}/myjs/login.js"></script>
     <script type="text/javascript">
         var ctx="${ctx}";
     </script>
@@ -50,7 +52,7 @@
                 <div class="function">
                     <div class="function-center">
                         <div class="function-register">
-                            没有账号？<span><a style="color: #ff5e5e;cursor:pointer;" href="/register">免费注册</a></span>
+                            没有账号？<span><a style="color: #ff5e5e;cursor:pointer;" href="${ctx}/user/register">免费注册</a></span>
                         </div>
 
                     </div>

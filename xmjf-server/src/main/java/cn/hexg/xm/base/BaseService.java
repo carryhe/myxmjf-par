@@ -52,7 +52,7 @@ public abstract class BaseService<T> {
 	 * @return
 	 */
 	public Map<String, Object> queryForPage(BaseQuery baseQuery) {
-		PageHelper.startPage(baseQuery.getPage(),baseQuery.getRows());
+		PageHelper.startPage(baseQuery.getPageNum(),baseQuery.getPageSize());
 		PageInfo<T>  pageInfo=new PageInfo<T>(baseDao.queryForPage(baseQuery));
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("total", pageInfo.getTotal());

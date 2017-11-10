@@ -56,7 +56,7 @@
     <!-- aop 切面配置 -->
     <aop:config>
         <aop:pointcut id="servicePointcut"
-            expression="execution(* cn.hexg.xm.service..*.*(..))" />
+            expression="execution (* cn.hexg.xm.service..*.*(..))" />
         <aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut" />
     </aop:config>
     <!-- 配置 sqlSessionFactory -->
