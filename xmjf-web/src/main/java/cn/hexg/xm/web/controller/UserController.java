@@ -5,8 +5,11 @@ import cn.hexg.xm.db.dao.IBasUserDao;
 import cn.hexg.xm.exceptions.ParamsExcetion;
 import cn.hexg.xm.model.ResultInfo;
 import cn.hexg.xm.po.BasUser;
+import cn.hexg.xm.po.BasUserSecurity;
+import cn.hexg.xm.service.IBasUserSecurityService;
 import cn.hexg.xm.service.IBasUserService;
 import cn.hexg.xm.service.impl.BasUserServiceImpl;
+import cn.hexg.xm.utils.AssertUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,8 @@ public class UserController extends BaseController {
 
     @Resource
     private IBasUserService basUserService;
+    @Resource
+    private IBasUserSecurityService basUserSecurityService;
 
 
     @RequestMapping("login")
@@ -80,7 +85,6 @@ public class UserController extends BaseController {
             session.removeAttribute(P2pConstant.PHONE_VERIFY_CODE + phone);
             session.removeAttribute(P2pConstant.PHONE_VERIFY_CODE_EXPIR_TIME + phone);
             session.removeAttribute(P2pConstant.PICTURE_VERIFY_KEY);
-
             resultInfo = success("用户注册成功!");
         } catch (ParamsExcetion e) {
             e.printStackTrace();
@@ -99,5 +103,39 @@ public class UserController extends BaseController {
         session.setAttribute("user", basUser);
         return success("用户登录成功！");
     }
+
+    @RequestMapping("queryUserAuthStatus")
+    @ResponseBody
+    public ResultInfo queryUserAuthStatus(HttpSession session){//进行查询该用户的实名认证的状态
+        BasUser user = (BasUser) session.getAttribute("user");
+        try {
+            basUserSecurityService.queryUserAuthStatus(user.getId());
+        } catch (Exception e) {
+            return failed("用户没有进行实名认证");
+        }
+        return success("该用户已经实名认证！");
+    }
+    @RequestMapping("userAuth")
+    @ResponseBody
+    public ResultInfo userAuth(String realName,String idCard,String payPassword,String payVerityPassword,HttpSession session){
+        AssertUtil.isTrue(StringUtils.isBlank(payPassword),"交易密码不能为空！");
+        AssertUtil.isTrue(StringUtils.isBlank(payVerityPassword),"确认密码不能为空！");
+        AssertUtil.isTrue(!payPassword.equals(payVerityPassword),"两次密码输入不一致！");
+        BasUser user = (BasUser) session.getAttribute("user");
+        AssertUtil.isTrue(null==user||user.getId()<1,"用户未登录");
+        //进行更新用户的安全信息，进行实名认证
+        basUserSecurityService.updateUserSercuityInfo(user.getId(),realName,idCard,payPassword);
+
+
+        return success("用户认证完成！");
+    }
+
+
+    @RequestMapping("auth")
+    public String toAuth(){
+        return "user/auth";
+    }
+
+
 
 }

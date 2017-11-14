@@ -5,9 +5,7 @@ $(function () {
      *   2.分页页码显示
      */
     loadInvestListData();
-
-
-    //  期限类别切换事件
+   //  期限类别切换事件
     $(".tab").click(function () {
         $(this).addClass("list_active");
         $(".tab").not($(this)).removeClass("list_active");//移除非当前节点list_active 属性
@@ -165,8 +163,9 @@ function initTrHtml(list) {
             trs = trs + "</td>";
             //  操作项
             trs = trs + "<td>";
+            var href=ctx+"/basItem/toBasItemDetailPage?itemId="+tempData.id;
             if (tempData.itemStatus == 1) {
-                trs = trs + "<p><a href=''>" +
+                trs = trs + "<p><a href="+href+">" +
                     "<input class='countdownButton' valid type='button' value='即将开放'></a></p>";
             }
             if (tempData.itemStatus == 10 || tempData.itemStatus == 13 || tempData.itemStatus == 18) {
@@ -176,22 +175,22 @@ function initTrHtml(list) {
                  */
                 var leaveAmmount = tempData.itemAccount - tempData.itemOngoingAccount;
                 trs = trs + "<p class='left_money'>可投金额" + leaveAmmount + "元</p>";
-                trs = trs + "<p><a href=''><input valid type='button' value='立即投资'></a></p>";
+                trs = trs + "<p><a href="+href+"><input valid type='button' value='立即投资'></a></p>";
             }
             if (tempData.itemStatus == 20) {
-                trs = trs + "<p><a href=''><input not_valid type='button' value='已抢完'></a></p>"
+                trs = trs + "<p><a href="+href+"><input not_valid type='button' value='已抢完'></a></p>"
             }
             if (tempData.itemStatus == 30 || tempData.itemStatus == 31) {
-                trs = trs + "<p><a href=''><input not_valid type='button' value='还款中'></a></p>"
+                trs = trs + "<p><a href="+href+"><input not_valid type='button' value='还款中'></a></p>"
             }
             if (tempData.itemStatus == 32) {
                 trs = trs + "<p style='position: relative'>" +
-                    "<a href='' class='yihuankuan'>已还款</a>" +
+                    "<a href="+href+" class='yihuankuan'>已还款</a>" +
                     "<div class='not_valid_pay'></div>" +
                     "</p>";
             }
             if (tempData.itemStatus == 23) {
-                trs = trs + "<p><a href=''><input not_valid type='button' value='已满标'></a></p>"
+                trs = trs + "<p><a href="+href+"><input not_valid type='button' value='已满标'></a></p>"
             }
             trs = trs + "</td>";
             //  行单元格拼接结束

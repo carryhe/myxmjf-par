@@ -19,7 +19,7 @@
                 <div id="hasUserId">
 
                     <div class='btn login' style="margin:36px auto 0; width: 164px;">
-                         <p>${basUser.mobile}<img style="margin:15px 0 0 5px;" src="/img/xl-icon.png" alt=""></p>
+                      <#--   <p>${basUser.mobile!""}<img style="margin:15px 0 0 5px;" src="/img/xl-icon.png" alt=""></p>-->
                     </div>
                     <div id="option" class="option display">
                         <div class="option-message">
