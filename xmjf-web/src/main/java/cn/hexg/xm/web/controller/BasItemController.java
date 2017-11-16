@@ -5,6 +5,7 @@ import cn.hexg.xm.model.ResultInfo;
 import cn.hexg.xm.po.*;
 import cn.hexg.xm.query.BasItemQuery;
 import cn.hexg.xm.service.*;
+import cn.hexg.xm.utils.AssertUtil;
 import cn.hexg.xm.utils.PageList;
 import com.fasterxml.jackson.databind.Module;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -30,6 +32,8 @@ public class BasItemController extends BaseController {
     private IBusAccountService busAccountService;
     @Resource
     private ISysPictureService sysPictureService;
+    @Resource
+    private IBusItemInvestService busItemInvestService;
 
 
 
@@ -84,6 +88,16 @@ public class BasItemController extends BaseController {
         model.addAttribute("loanUser",basUserSecurity);
         model.addAttribute("item",basItem);
         return "item/details";
+    }
+
+    @RequestMapping("doInvest")
+    @ResponseBody
+    public ResultInfo doInvest(BigDecimal amount,Integer itemId,String password,HttpSession session){
+        //获取用户的id
+        BasUser user = (BasUser) session.getAttribute("user");
+        AssertUtil.isTrue(null==user||user.getId()<1,"用户未登录");
+        busItemInvestService.addBusItemInvest(user.getId(),amount,itemId,password);
+        return success("投资项目成功！");
     }
 
 }

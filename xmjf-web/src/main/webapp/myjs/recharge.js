@@ -1,6 +1,4 @@
 $(function () {
-
-
     // 切换验证码
     $("#validImg").click(function () {
         $(this).attr("src",ctx+"/img/getPictureVerifyImage?time="+new Date());

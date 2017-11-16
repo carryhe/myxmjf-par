@@ -15,7 +15,7 @@
     <script type="text/javascript" >
         var ctx="${ctx}";
     </script>
-    <script type="text/javascript" src="${ctx}/js/recharge.recode.js"></script>
+    <script type="text/javascript" src="${ctx}/myjs/recharge.recode.js"></script>
 </head>
 <body>
 <#include "../include/header.ftl">

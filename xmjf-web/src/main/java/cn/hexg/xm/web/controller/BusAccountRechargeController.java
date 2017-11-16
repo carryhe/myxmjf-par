@@ -1,20 +1,24 @@
 package cn.hexg.xm.web.controller;
 
 import cn.hexg.xm.constant.P2pConstant;
+import cn.hexg.xm.dto.CallBackDto;
 import cn.hexg.xm.dto.PayDto;
 import cn.hexg.xm.exceptions.ParamsExcetion;
 import cn.hexg.xm.model.ResultInfo;
 import cn.hexg.xm.po.BasUser;
 import cn.hexg.xm.po.BasUserSecurity;
 import cn.hexg.xm.po.BusAccountRecharge;
+import cn.hexg.xm.query.BusAccountRechargeQuery;
 import cn.hexg.xm.service.IBasUserSecurityService;
 import cn.hexg.xm.service.IBusAccountRechargeService;
 import cn.hexg.xm.service.IBusAccountService;
 import cn.hexg.xm.utils.AssertUtil;
+import cn.hexg.xm.utils.PageList;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -75,6 +79,35 @@ public class BusAccountRechargeController extends BaseController {
 
         return "user/pay";
     }
+
+    @RequestMapping("callBack")
+    public  String callBack(String trade_status,String out_order_no,BigDecimal total_fee,
+                            String sign,HttpSession session){
+        BasUser basUser= (BasUser) session.getAttribute("user");
+        CallBackDto callBackDto=new CallBackDto();
+        callBackDto.setTradeStatus(trade_status);
+        callBackDto.setTotalFee(total_fee.toString());
+        callBackDto.setOutOrderNo(out_order_no);
+        callBackDto.setSign(sign);
+        busAccountRechargeService.updateBusAccountRecharge(callBackDto,basUser.getId());
+        return "user/recharge_record";
+    }
+
+
+    @RequestMapping("rechargeRecord")
+    public  String toRechargeRecord(){
+        return "user/recharge_record";
+    }
+
+
+    @RequestMapping("queryAccountRechargeListByParams")
+    @ResponseBody
+    public PageList queryAccountRechargeListByParams(BusAccountRechargeQuery busAccountRechargeQuery, HttpSession session){
+        BasUser basUser= (BasUser) session.getAttribute("user");
+        busAccountRechargeQuery.setUserId(basUser.getId());
+        return busAccountRechargeService.queryAccountRechargeListByParams(busAccountRechargeQuery);
+    }
+
 
 
 }

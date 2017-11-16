@@ -52,7 +52,7 @@
                            style="margin-top: 18px;margin-left: 10px;float: left"/>
 
                     <div class="verification-img">
-                        <img src="${ctx}/img/getPictureVerifyImage" id="validImg" style="cursor:pointer;"/>
+                        <img src="${ctx}/getPictureVerifyImage" id="validImg" style="cursor:pointer;"/>
                     </div>
                 </div>
                 <div class="third-pay">

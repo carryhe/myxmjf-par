@@ -19,20 +19,20 @@
                 <div id="hasUserId">
 
                     <div class='btn login' style="margin:36px auto 0; width: 164px;">
-                      <#--   <p>${basUser.mobile!""}<img style="margin:15px 0 0 5px;" src="/img/xl-icon.png" alt=""></p>-->
+                        <p>${user.mobile!""}<img style="margin:15px 0 0 5px;" src="/img/xl-icon.png" alt=""></p>
                     </div>
                     <div id="option" class="option display">
                         <div class="option-message">
-                            <a class="selected" href="/user/site?-1?3" style="cursor:pointer;">消息中心</a>
+                            <a class="selected" href="" style="cursor:pointer;">消息中心</a>
                         </div>
                         <div class="option-two">
-                            <a class="selected2" href="/user/log?3?3" style="cursor:pointer;">资金记录</a>
+                            <a class="selected2" href="" style="cursor:pointer;">资金记录</a>
                         </div>
                         <div class="option-two">
-                            <a class="selected3" href="/user/inviteCode?5?3" style="cursor:pointer;">邀请好友</a>
+                            <a class="selected3" href="" style="cursor:pointer;">邀请好友</a>
                         </div>
                         <div class="option-two">
-                            <a class="selected4" href="/loginOut" id="exit" style="cursor:pointer;">我要退出</a>
+                            <a class="selected4" href=${ctx}+"/user/loginOut" id="exit" style="cursor:pointer;">我要退出</a>
                         </div>
                     </div>
                 </div>

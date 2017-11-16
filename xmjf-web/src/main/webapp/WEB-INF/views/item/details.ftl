@@ -153,7 +153,7 @@
                      <#if item.itemStatus ==1>
                          <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="即将开放"></a>
                         <#elseif  item.itemStatus==10>
-                            <a href=""><input class='invest_button fl'  type="button"  value="立即投资"></a>
+                            <a href="javascript:void(0)"><input class='invest_button fl'  type="button"  value="立即投资"></a>
                         <#elseif item.itemStatus==20>
                          <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="已抢完"></a>
                         <#elseif  item.itemStatus==30 || item.itemStatus==31 >
@@ -309,7 +309,7 @@
                     <ul class="lunbo" id="slider">
                         <#if pics??>
                             <#list pics as pic>
-                                <li style="background-image: url(${pic.picturePath})" onclick="picTab()" data-url="${pic.picturePath}" ></li>
+                                <li style="background-image: url(${pic.picturePath})" onclick="javascript:picTab()" data-url="${pic.picturePath}" ></li>
                             </#list>
                         </#if>
 

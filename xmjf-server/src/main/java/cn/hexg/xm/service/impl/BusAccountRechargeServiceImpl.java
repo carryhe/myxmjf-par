@@ -42,6 +42,9 @@ public class BusAccountRechargeServiceImpl implements IBusAccountRechargeService
        AssertUtil.isTrue(null==basUser,"未登录");
        BasUserSecurity basUserSecurity= basUserSecurityDao.queryUserSecurityByUserId(basUser.getId());
        AssertUtil.isTrue(basUserSecurity.getRealnameStatus().equals(0),"用户未认证!");
+       /*
+       * 注意交易密码的加密操作
+       * */
        AssertUtil.isTrue(!basUserSecurity.getPaymentPassword().equals(password),"交易密码不正确!");
        String orderNo= MyStringUtils.getOrderNo();
        busAccountRecharge.setOrderNo(orderNo);

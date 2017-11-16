@@ -40,6 +40,9 @@ public class BasUserSecurityServiceImpl extends BaseService<BasUserSecurity> imp
         AssertUtil.isTrue(null==basUserSecurity,"用户信息错误！");
         basUserSecurity.setRealname(realName);
         basUserSecurity.setIdentifyCard(idCard);
+        /*
+        * 将交易密码进行加密操作
+        * */
         basUserSecurity.setPaymentPassword(payPassword);
         basUserSecurity.setRealnameStatus(1);
         basUserSecurity.setVerifyTime(new Date());

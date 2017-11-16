@@ -22,9 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 
-/**
- * Created by lp on 2017/11/7.
- */
 @Controller
 @RequestMapping("user")
 public class UserController extends BaseController {
@@ -104,6 +101,13 @@ public class UserController extends BaseController {
         return success("用户登录成功！");
     }
 
+    @RequestMapping("loginOut")
+    public String loginOut(HttpSession session){
+        session.removeAttribute("user");
+        return "login";
+    }
+
+
     @RequestMapping("queryUserAuthStatus")
     @ResponseBody
     public ResultInfo queryUserAuthStatus(HttpSession session){//进行查询该用户的实名认证的状态
@@ -125,8 +129,6 @@ public class UserController extends BaseController {
         AssertUtil.isTrue(null==user||user.getId()<1,"用户未登录");
         //进行更新用户的安全信息，进行实名认证
         basUserSecurityService.updateUserSercuityInfo(user.getId(),realName,idCard,payPassword);
-
-
         return success("用户认证完成！");
     }
 

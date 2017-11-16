@@ -6,4 +6,6 @@ import cn.hexg.xm.po.BusUserStatKey;
 
 public interface BusUserStatDao extends BaseDao<BusUserStat> {
 
+
+    BusUserStat queryBusUserStatByUserId(Integer id);
 }
