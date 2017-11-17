@@ -4,6 +4,7 @@ import cn.hexg.xm.base.BaseService;
 import cn.hexg.xm.constant.ItemStatus;
 import cn.hexg.xm.constant.P2pConstant;
 import cn.hexg.xm.db.dao.*;
+import cn.hexg.xm.dto.BusItemInvestDto;
 import cn.hexg.xm.po.*;
 import cn.hexg.xm.service.IBasUserSecurityService;
 import cn.hexg.xm.service.IBasUserService;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Date;
+import java.util.*;
 
 @Service
 public class BusItemInvestServiceImpl extends BaseService<BusItemInvest> implements IBusItemInvestService {
@@ -129,6 +130,24 @@ public class BusItemInvestServiceImpl extends BaseService<BusItemInvest> impleme
 
 
 
+    }
+
+    @Override
+    public Map<String, Object> queryItemInvestsFiveMonthByUserId(Integer userId) {
+        List<BusItemInvestDto> busItemInvestDtos= busItemInvestDao.queryItemInvestsFiveMonthByUserId(userId);
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",200);
+        List<String> months=null;
+        List<BigDecimal> investAmounts=null;
+        months=new ArrayList<String>();
+        investAmounts=new ArrayList<BigDecimal>();
+        for(BusItemInvestDto busItemInvestDto:busItemInvestDtos){
+            months.add(busItemInvestDto.getMonth());
+            investAmounts.add(busItemInvestDto.getInvestAmount());
+        }
+        map.put("months",months);
+        map.put("amounts",investAmounts);
+        return map;
     }
 
     /**

@@ -1,6 +1,7 @@
 package cn.hexg.xm.web.controller;
 
 import cn.hexg.xm.constant.P2pConstant;
+import cn.hexg.xm.dto.BusAccountDto;
 import cn.hexg.xm.dto.CallBackDto;
 import cn.hexg.xm.dto.PayDto;
 import cn.hexg.xm.exceptions.ParamsExcetion;
@@ -14,6 +15,7 @@ import cn.hexg.xm.service.IBusAccountRechargeService;
 import cn.hexg.xm.service.IBusAccountService;
 import cn.hexg.xm.utils.AssertUtil;
 import cn.hexg.xm.utils.PageList;
+import cn.hexg.xm.web.annotations.Islogin;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +34,9 @@ public class BusAccountRechargeController extends BaseController {
     private IBasUserSecurityService basUserSecurityService;
     @Resource
     private IBusAccountRechargeService busAccountRechargeService;
-
+    @Resource
+    private IBusAccountService busAccountService;
+    @Islogin
     @RequestMapping("setting")
     public  String toSettingPage(HttpSession session, Model model){
         BasUser basUser= (BasUser) session.getAttribute("user");
@@ -42,11 +46,13 @@ public class BusAccountRechargeController extends BaseController {
     }
 
     @RequestMapping("recharge")
+    @Islogin
     public String toAccountRecharge(){
         return "user/recharge";
     }
 
     @RequestMapping("addBusAccountRecharge")
+    @Islogin
     public String addBusAccountRecharge(BigDecimal amount, String picCode, String password, HttpSession session, Model model){
         //进行添加账户交易记录
         BasUser user = (BasUser) session.getAttribute("user");
@@ -81,6 +87,7 @@ public class BusAccountRechargeController extends BaseController {
     }
 
     @RequestMapping("callBack")
+    @Islogin
     public  String callBack(String trade_status,String out_order_no,BigDecimal total_fee,
                             String sign,HttpSession session){
         BasUser basUser= (BasUser) session.getAttribute("user");
@@ -93,13 +100,18 @@ public class BusAccountRechargeController extends BaseController {
         return "user/recharge_record";
     }
 
-
+    @Islogin
     @RequestMapping("rechargeRecord")
     public  String toRechargeRecord(){
         return "user/recharge_record";
     }
+    @Islogin
+    @RequestMapping("accountInfo")
+    public  String toAccountInfoPage(){
+        return "user/account_info";
+    }
 
-
+    @Islogin
     @RequestMapping("queryAccountRechargeListByParams")
     @ResponseBody
     public PageList queryAccountRechargeListByParams(BusAccountRechargeQuery busAccountRechargeQuery, HttpSession session){
@@ -108,6 +120,14 @@ public class BusAccountRechargeController extends BaseController {
         return busAccountRechargeService.queryAccountRechargeListByParams(busAccountRechargeQuery);
     }
 
+    //创建进行查询账户信息的接口
+    @RequestMapping("queryAccountInfoByUserId")
+    @ResponseBody
+    @Islogin
+    public BusAccountDto queryAccountInfoByUserId(HttpSession session){
+        BasUser basUser= (BasUser) session.getAttribute("user");
+        return busAccountService.queryBusAccountInfoByUserId(basUser.getId());
+    }
 
 
 }

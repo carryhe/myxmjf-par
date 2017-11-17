@@ -1,6 +1,7 @@
 package cn.hexg.xm.db.dao;
 
 import cn.hexg.xm.base.BaseDao;
+import cn.hexg.xm.dto.BusAccountDto;
 import cn.hexg.xm.po.BusAccount;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,5 +27,7 @@ public interface BusAccountDao extends BaseDao<BusAccount> {
                                       @Param("cashAmount")BigDecimal cashAmount,
                                       @Param("repayAmount") BigDecimal repayAmount,
                                       @Param("userId") Integer userId);
+
+    public BusAccountDto queryBusAccountInfoByUserId(@Param("userId")Integer userId);
 
 }

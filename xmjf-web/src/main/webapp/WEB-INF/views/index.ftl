@@ -23,10 +23,10 @@
         <a href="/index?0?0" class="logo">
         </a>
         <div class="header_nav" id="indexNav">
-            <a href="${ctx}/index?0?0" class="header_nav_active">首页</a>
+            <a href="${ctx}/index" class="header_nav_active">首页</a>
             <a href="${ctx}/basItem/basItemListPage">我要投资</a>
             <a href="${ctx}/security?0?2">安全保障</a>
-            <a href="${ctx}/account/toAccountPage">我的账户</a>
+            <a href="${ctx}/account/accountInfo">我的账户</a>
             <a href="${ctx}/introduce?0?4">关于我们</a>
         </div>
         <div class="header_button">

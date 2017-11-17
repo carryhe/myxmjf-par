@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import cn.hexg.xm.constant.P2pConstant;
+import cn.hexg.xm.exceptions.LoginException;
 import cn.hexg.xm.exceptions.ParamsExcetion;
 import cn.hexg.xm.model.ResultInfo;
 import org.springframework.stereotype.Component;
@@ -35,8 +36,12 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 			/**
 			 * 处理未登录情况
 			 */
-
-			
+			if (ex instanceof LoginException){
+				ModelAndView mv=new ModelAndView();
+				mv.addObject("ctx",request.getContextPath());
+				mv.setViewName("login");
+				return mv;
+			}
 			HandlerMethod handlerMethod=(HandlerMethod) handler;
 			Method method= handlerMethod.getMethod();
 			ResponseBody responseBody= method.getAnnotation(ResponseBody.class);

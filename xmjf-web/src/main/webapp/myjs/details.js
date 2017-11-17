@@ -1,9 +1,83 @@
+function todoInvest(itemId, amount, pass) {
+    $.ajax({
+        type:"post",
+        url:ctx+"/basItem/doInvest",
+        data:{
+            itemId:itemId,
+            amount:amount,
+            password:pass
+        },
+        dataType:"json",
+        success:function (data) {
+            if(data.code==200){
+                layer.msg("项目投标成功!");
+                window.location.reload();
+            }else{
+                layer.msg(data.msg);
+            }
+        }
+    })
+}
+
 $(function () {
     /**
      * 渲染原型进度条
      */
     initInvestJd();
 
+    /*
+    * 进行点击事件
+    * 提交投资
+    * */
+    $("#doInverst").click(function () {
+        //进行判断投资的参数
+        var amount = $("#usableMoney").val();
+        var itemId = $("#itemId").val();
+
+        //判断参数的合法性
+        if(isEmpty(amount)){
+            layer.tips("投资的金额不能为空！","#usableMoney");
+            return;
+        }
+        amount=parseInt(amount);
+        if(isEmpty(itemId)){
+            layer.tips("投资项目不存在！","#investFinal")
+            return;
+        }
+        var minInvestMoney =$("#minInvestMoney").attr("data-value")
+        var  maxInvestMoney=$("#maxInvestMoney").attr("data-value");
+        if(!isEmpty(minInvestMoney)){
+            minInvestMoney=parseInt(minInvestMoney);
+            if(amount<minInvestMoney){
+                layer.tips("起投资金不能小于最小投资金额!","#usableMoney");
+                return;
+            }
+        }
+        if(!isEmpty(maxInvestMoney)){
+            maxInvestMoney=parseInt(maxInvestMoney);
+            if(amount>maxInvestMoney){
+                layer.tips("起投资金不能大于最大投资金额!","#usableMoney");
+                return;
+            }
+        }
+        // 余额
+        var ye=$("#ye").attr("data-value");
+        ye=parseInt(ye);
+        if(amount>ye){
+            layer.tips("投资资金不能大于账户余额!","#usableMoney");
+            return;
+        }
+
+        var password="";
+
+
+        layer.prompt({title: '请输入交易密码', formType: 1}, function(pass, index){
+            layer.close(index);
+            //layer.msg(pass);
+            todoInvest(itemId,amount,pass);
+        });
+
+    })
 
 
 

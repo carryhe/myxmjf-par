@@ -26,41 +26,41 @@
 <div class="invest_container">
     <div class="invest_item">
         <h2 class="item_name">${(item.itemName)!""}
-            <#if item.itemIsnew==1>
-                <span class="hot" new>NEW</span>
-               <#elseif item.itemIsnew==0 && item.moveVip==1>
-                   <span class="hot" app>APP</span>
-              <#elseif item.itemIsnew==0 && item.moveVip==0 && item.itemIsrecommend ==1>
-                <span class="hot" hot>HOT</span>
-              <#elseif item.itemIsnew==0 && item.moveVip==0 && item.itemIsrecommend ==0 && item.password??>
-                <span class="hot" lock>LOCK</span>
-            </#if>
+        <#if item.itemIsnew==1>
+            <span class="hot" new>NEW</span>
+        <#elseif item.itemIsnew==0 && item.moveVip==1>
+            <span class="hot" app>APP</span>
+        <#elseif item.itemIsnew==0 && item.moveVip==0 && item.itemIsrecommend ==1>
+            <span class="hot" hot>HOT</span>
+        <#elseif item.itemIsnew==0 && item.moveVip==0 && item.itemIsrecommend ==0 && item.password??>
+            <span class="hot" lock>LOCK</span>
+        </#if>
 
         </h2>
         <div class="invest_detail">
             <div>
                 <p class="rate"><strong class="rate_int">${item.itemRate}</strong>
-                	<span class="percent">%
-                        <#if item.itemAddRate??>
-                            +${item.itemAddRate}%
-                        <#else>
-                            无
-                        </#if>
+                    <span class="percent">%
+                    <#if item.itemAddRate??>
+                        +${item.itemAddRate}%
+                    <#else>
+                        无
+                    </#if>
 
                 	</span></p>
                 <p class="details_text">预期年化收益率</p>
             </div>
             <div class="circle">
                 <p class="cash_num"><span id="itemCycleForCoupon">${item.itemCycle}</span>
-                   <#if item.itemCycleUnit == 1>
-                     天
-                   <#elseif item.itemCycleUnit == 2>
-                     月
-                   <#elseif item.itemCycleUnit == 3>
-                       季
-                   <#elseif item.itemCycleUnit == 4>
-                       年
-                   </#if>
+                <#if item.itemCycleUnit == 1>
+                    天
+                <#elseif item.itemCycleUnit == 2>
+                    月
+                <#elseif item.itemCycleUnit == 3>
+                    季
+                <#elseif item.itemCycleUnit == 4>
+                    年
+                </#if>
                 </p>
                 <p class="details_text">项目期限</p>
             </div>
@@ -78,35 +78,34 @@
                 <tr>
                     <td width="76">还款方式</td>
                     <td width="120">
-                        <#if item.itemRepayMethod==1>
-                            一次性还款
-                            <#elseif  item.receiptMethod==2>
-                              等额本息
-                            <#elseif  item.receiptMethod==3>
-                              先息后本
-                            <#else >
-                              每日付息
-                        </#if>
+                    <#if item.itemRepayMethod==1>
+                        一次性还款
+                    <#elseif  item.receiptMethod==2>
+                        等额本息
+                    <#elseif  item.receiptMethod==3>
+                        先息后本
+                    <#else >
+                        每日付息
+                    </#if>
 
                     </td>
                     <td width="76">起投金额</td>
                     <td width="154">
-                        <em id="minInvestMoney">
-                            <#if item.itemSingleMinInvestment??>
-                                   ${item.itemSingleMinInvestment}元
-
-                              <#else >
-                                 无限制
-                            </#if>
-                   </em>
+                        <em id="minInvestMoney" data-value=${item.itemSingleMinInvestment}>
+                        <#if item.itemSingleMinInvestment??>
+                        ${item.itemSingleMinInvestment}元
+                        <#else >
+                            无限制
+                        </#if>
+                        </em>
                     </td>
                     <td width="76">最大投标</td>
                     <td width="77">
-                        <em id="maxInvestMoney">
+                        <em id="maxInvestMoney" data-value=${item.itemSingleMaxInvestment?c}>
                         <#if item.itemSingleMaxInvestment??>
-                                ${item.itemSingleMaxInvestment}元
-                            <#else>
-                               无限制
+                        ${item.itemSingleMaxInvestment}元
+                        <#else>
+                            无限制
                         </#if>
                         </em>
 
@@ -115,22 +114,22 @@
                 <tr>
                     <td>投标奖励</td>
                     <td>
-                    	<#if item.itemAddRate??>
-                    	      ${item.itemAddRate}%
-                            <#else >
-                             无
-                    	</#if>
+                    <#if item.itemAddRate??>
+                    ${item.itemAddRate}%
+                    <#else >
+                        无
+                    </#if>
                     </td>
                     <td>发布时间</td>
                     <td>
-                        <#if item.releaseTime??>
+                    <#if item.releaseTime??>
                              ${item.releaseTime?string("yyyy-MM-dd")}
                         </#if>
 
                     </td>
                     <td>有效期</td>
                     <td>
-                        <#if item.endTime??>
+                    <#if item.endTime??>
                           ${item.endTime?string("yyyy-MM-dd")}
                         </#if>
 
@@ -140,37 +139,37 @@
         </div>
         <div class="invest_panel">
             <p class="text">剩余金额：${item.itemAccount-item.itemOngoingAccount}元</p>
-             <#if user??>
-                 <p class="text left_account"><span>账户余额：${busAccount.usable}元</span>
-                 <a class="charge" href="javascript:toCharge()">充值</a>
-                 </p>
-             </#if>
+        <#if user??>
+            <p class="text left_account"><span id="ye" data-value=${busAccount.usable?c}>账户余额：${busAccount.usable}元</span>
+                <a class="charge" href="javascript:toRecharge()">充值</a>
+            </p>
+        </#if>
 
             <p class="input_wrap left_account"><input type="text" id='usableMoney' placeholder="请输入投资金额"></p>
 
             <p class="input_wrap clear" style="margin-top:-12px;">
-                <#if  user??>
-                     <#if item.itemStatus ==1>
-                         <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="即将开放"></a>
-                        <#elseif  item.itemStatus==10>
-                            <a href="javascript:void(0)"><input class='invest_button fl'  type="button"  value="立即投资"></a>
-                        <#elseif item.itemStatus==20>
-                         <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="已抢完"></a>
-                        <#elseif  item.itemStatus==30 || item.itemStatus==31 >
-                         <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="还款中"></a>
-                     <#elseif  item.itemStatus==23 >
-                         <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="已满标"></a>
-                     <#else>
-                         <a href="javascript:void(0)">
-                             <input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="已还款">
-                         </a>
+            <#if  user??>
+                <#if item.itemStatus ==1>
+                    <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="即将开放"></a>
+                <#elseif  item.itemStatus==10>
+                    <a href="javascript:void(0)"><input class='invest_button fl'  id="doInverst" type="button"  value="立即投资"></a>
+                <#elseif item.itemStatus==20>
+                    <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="已抢完"></a>
+                <#elseif  item.itemStatus==30 || item.itemStatus==31 >
+                    <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="还款中"></a>
+                <#elseif  item.itemStatus==23 >
+                    <a href="javascript:void(0)"><input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="已满标"></a>
+                <#else>
+                    <a href="javascript:void(0)">
+                        <input class='invest_button fl' style="background: #c9c9c9;cursor: default" type="button"  value="已还款">
+                    </a>
 
-                     </#if>
-                 <#else >
-                     <a href="/login"><input class='invest_button fl' type="button" value="请登录"></a>
                 </#if>
+            <#else >
+                <a href="${ctx}/user/login"><input class='invest_button fl' type="button" value="请登录"></a>
+            </#if>
 
-                <span class="caculator fl"></span>
+            <#--<span class="caculator fl"></span>-->
             </p>
             <p class="no_account">没有账号？<a href="/register">立即注册</a></p>
         </div>
@@ -183,34 +182,34 @@
         </div>
         <div id="contents">
             <div class="tab_content" >
-            <h3 class="title">关于车贷宝</h3>
-            <div class="type_box">
-               <img src="/img/cheshangbao.png" alt="">
-            </div>
+                <h3 class="title">关于车贷宝</h3>
+                <div class="type_box">
+                    <img src="/img/cheshangbao.png" alt="">
+                </div>
 
-            <h3 class="title">基本信息</h3>
-          <div class="table_box">
-              <table class="table_base">
-                  <thead>
-                  <tr><th colspan="2">借款人信息</th><th colspan="2">车辆信息</th></tr>
-                  </thead>
+                <h3 class="title">基本信息</h3>
+                <div class="table_box">
+                    <table class="table_base">
+                        <thead>
+                        <tr><th colspan="2">借款人信息</th><th colspan="2">车辆信息</th></tr>
+                        </thead>
 
-                  <tbody>
-                  <tr><td>姓&nbsp;&nbsp;&nbsp;&nbsp;名</td><td>${(loanUser.realname)!}</td>
-                      <td>车型</td><td>${(busItemLoan.carType)!}</td></tr>
-                  <tr>
-                      <td>身份证号</td><td>${(loanUser.identifyCard)!}</td><td>上牌时间</td><td>
-                      <#if busItemLoan??>
+                        <tbody>
+                        <tr><td>姓&nbsp;&nbsp;&nbsp;&nbsp;名</td><td>${(loanUser.realname)!}</td>
+                            <td>车型</td><td>${(busItemLoan.carType)!}</td></tr>
+                        <tr>
+                            <td>身份证号</td><td>${(loanUser.identifyCard)!}</td><td>上牌时间</td><td>
+                        <#if busItemLoan??>
                           <#if busItemLoan.licensingTime??>
-                           ${busItemLoan.licensingTime?string("yyyy-MM-dd")}
-                          </#if>
+                        ${busItemLoan.licensingTime?string("yyyy-MM-dd")}
+                        </#if>
                       </#if>
-                  </td></tr>
-                  <tr><td></td><td></td><td>公里数</td><td>${(busItemLoan.kilometers)!"0"}万公里</td></tr>
-                  <tr><td>首付金额</td><td>${(busItemLoan.firstPayAmount)!""}元</td><td>评估价</td><td>${(busItemLoan.assessPrice)!}元</td>
-                  </tr>
+                        </td></tr>
+                        <tr><td></td><td></td><td>公里数</td><td>${(busItemLoan.kilometers)!"0"}万公里</td></tr>
+                        <tr><td>首付金额</td><td>${(busItemLoan.firstPayAmount)!""}元</td><td>评估价</td><td>${(busItemLoan.assessPrice)!}元</td>
+                        </tr>
 
-                  </tbody>
+                        </tbody>
                     <#--
                        type==2
                     <thead>
@@ -238,19 +237,19 @@
                     <tr><td>培训驾校</td><td>${trainingInformation.drivingSchool}</td><td>5</td><td>专业团队催收</td></tr>
                     <tr><td>资金用途</td><td>大学生驾校培训费</td><td>6</td><td>担保机构无条件垫付代偿</td></tr>
                     </tbody>-->
-                 <#--
-                   type==5
-                 <thead>
-                  <tr><th colspan="2">借款人信息</th><th colspan="2">车辆信息</th></tr>
-                  </thead>
+                    <#--
+                      type==5
+                    <thead>
+                     <tr><th colspan="2">借款人信息</th><th colspan="2">车辆信息</th></tr>
+                     </thead>
 
-                          <tbody>
-                          <tr><td>姓&nbsp;&nbsp;&nbsp;&nbsp;名</td><td>${security.realname!''}</td><td>车型</td><td>${itemLoan.carType!''}</td></tr>
-                          <tr><td>身份证号</td><td>${security.identifyCard!''}</td><td>上牌时间</td><td><#if itemLoan.licensingTime??>${itemLoan.licensingTime?string("yyyy-MM")}</#if></td></tr>
-                          <tr><td>居&nbsp;住&nbsp;地</td><td>${info.currentAddress!''}</td><td>公里数</td><td>${itemLoan.kilometers!'0'}万公里</td></tr>
-                          <tr><td>首付金额</td><td><#if itemLoan.firstPayAmount??>${itemLoan.firstPayAmount!''}元</#if></td><td>评估价</td><td><#if itemLoan.assessPrice??>${itemLoan.assessPrice?number}元</#if></td></tr>
+                             <tbody>
+                             <tr><td>姓&nbsp;&nbsp;&nbsp;&nbsp;名</td><td>${security.realname!''}</td><td>车型</td><td>${itemLoan.carType!''}</td></tr>
+                             <tr><td>身份证号</td><td>${security.identifyCard!''}</td><td>上牌时间</td><td><#if itemLoan.licensingTime??>${itemLoan.licensingTime?string("yyyy-MM")}</#if></td></tr>
+                             <tr><td>居&nbsp;住&nbsp;地</td><td>${info.currentAddress!''}</td><td>公里数</td><td>${itemLoan.kilometers!'0'}万公里</td></tr>
+                             <tr><td>首付金额</td><td><#if itemLoan.firstPayAmount??>${itemLoan.firstPayAmount!''}元</#if></td><td>评估价</td><td><#if itemLoan.assessPrice??>${itemLoan.assessPrice?number}元</#if></td></tr>
 
-                      </tbody>-->
+                         </tbody>-->
                     <#--
                       其他情况
                     <thead>
@@ -271,52 +270,52 @@
                             <tr><td>出&nbsp;生&nbsp;地</td><td>${info.birthAddress!''}</td><td>购买价格</td><td>${itemLoan.buyPrice!''}</td></tr>
                             </tbody>
                         </#if>-->
-                </table>
-            </div>
-            <h3 class="title" id="anquanshenheType">安全审核</h3>
-            <ul class="security_check clear">
-               <if pics??>
-                  <#list pics as pic>
+                    </table>
+                </div>
+                <h3 class="title" id="anquanshenheType">安全审核</h3>
+                <ul class="security_check clear">
+                    <if pics??>
+                    <#list pics as pic>
                         <#if pic.itemPictureType==1>
                             <li style="background-image: url(/img/shenfenzheng.png)">身份证</li>
-                          <#elseif pic.itemPictureType==2>
-                              <li style="background-image: url(/img/xue.png)">学生证</li>
+                        <#elseif pic.itemPictureType==2>
+                            <li style="background-image: url(/img/xue.png)">学生证</li>
                         </#if>
-                  </#list>
+                    </#list>
 
-               </if>
+                    </if>
 
-              <#--  <li style="background-image: url(/img/cheng.png)">车城外观</li>
-                <li style="background-image: url(/img/cheng.png)">车城外观</li>-->
+                <#--  <li style="background-image: url(/img/cheng.png)">车城外观</li>
+                  <li style="background-image: url(/img/cheng.png)">车城外观</li>-->
 
 
-            </ul>
+                </ul>
 
-            <h3 class="title">相关文件</h3>
-            <div class="lunbo_wrap">
-                <button class="click_button pre" id="pre" onclick="play()" >
+                <h3 class="title">相关文件</h3>
+                <div class="lunbo_wrap">
+                    <button class="click_button pre" id="pre" onclick="play()" >
                         <
-                </button>
-                <button class="click_button next" id="next"  onclick="play()" >
-                    >
-                </button>
-                <div class="image_large" id="imgLarge">
-                    <div class="left"></div>
-                    <div class="right"></div>
-                    <div class="close"></div>
-                </div>
-                <div class="over_hidden">
-                    <ul class="lunbo" id="slider">
+                    </button>
+                    <button class="click_button next" id="next"  onclick="play()" >
+                        >
+                    </button>
+                    <div class="image_large" id="imgLarge">
+                        <div class="left"></div>
+                        <div class="right"></div>
+                        <div class="close"></div>
+                    </div>
+                    <div class="over_hidden">
+                        <ul class="lunbo" id="slider">
                         <#if pics??>
                             <#list pics as pic>
-                                <li style="background-image: url(${pic.picturePath})" onclick="javascript:picTab()" data-url="${pic.picturePath}" ></li>
+                                <li style="background-image: url(${pic.picturePath})" onclick="picTab()" data-url="${pic.picturePath}" ></li>
                             </#list>
                         </#if>
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
             <div class="tab_content" style="display: none">
                 <div class="all_security_img">
                     <img src="/img/fengxianbaozhang.png" alt="">
@@ -352,7 +351,7 @@
                 <div class="pages">
                     <nav>
                         <ul id="pages" style="margin:84px auto" class="pagination">
-                            <#--<li class="active"><a>1</a></li>-->
+                        <#--<li class="active"><a>1</a></li>-->
                         </ul>
                     </nav>
                 </div>
@@ -363,91 +362,7 @@
 
 
 
-<#--立即投资,无需充值-->
-<div class="bg_panel" style="display: none" id="couponPanel">
-    <div class="panel">
-        <div class="close"></div>
-        <div class="total"><span class="fl" id="">投资总额&nbsp;&nbsp;<em id="investAccountTotal"></em><em id="couponAmount" style="color:#ff5757"></em></span><span class="fr">
-            预期收益&nbsp;&nbsp;<em id="itemIncome"></em>
-            <em style="color:#ff5757" id="couponIncome"></em>
-        </span></div>
-        <div id='hasCoupon' class="coupon"><label>
-            <input id='couponCheck' type="checkbox" checked>&nbsp;&nbsp;红&nbsp;&nbsp;&nbsp;&nbsp;包</label>
-            <select name="selectCoupon" id="selectCoupon">
 
-            </select>
-        </div>
-        <div id='hasNoCoupon' class="coupon"><label><input disabled type="checkbox">&nbsp;&nbsp;红&nbsp;&nbsp;&nbsp;&nbsp;包</label><span>暂无红包可使用，点击<a href="/user/reward?1?3">查看</a></span></div>
-        <div id='hasticket' class="coupon"><label>
-            <input  type="checkbox" id="tiketCheck" checked>&nbsp;&nbsp;加息券</label>
-            <select name="selectTiket" id="selectTiket">
-
-            </select>
-        </div>
-        <div id='hasNoticket' class="coupon"><label><input disabled type="checkbox">&nbsp;&nbsp;加息券</label><span>暂无加息券可使用，点击<a href="/user/reward?1?3">查看</a></span></div>
-    <#--<div><input type="password" placeholder="请输入6位交易密码"><a href="">忘记交易密码</a></div>-->
-        <div class="invest"><input type="button" value="立即投资" id="investFinal"></div>
-        <div class="agreement"><label for=""><input checked type="checkbox" id="agreement">&nbsp;&nbsp;我同意<a style="color: #5F5F5F !important;" href="/html/investxy.html" target="_blank">《投资协议》</a></label></div>
-    </div>
-</div>
-
-<#--立即投资,需充值-->
-<div class="bg_panel" style="display: none" id="needRecharge">
-    <div class="panel">
-        <div class="close"></div>
-        <div class="tips">当前账户余额不足，是否前去<strong>充值</strong>？</div>
-        <div class="confirm" >
-            <input  style='cursor: pointer;' id="rechargeCancle"  class='no' type="button" value="取消">
-            <a href="/account/recharge/recharge?-1?3?0"><input id='doRecharge' class='yes' type="button" value="确定"></a>
-        </div>
-    </div>
-</div>
-
-<#--收益计算器-->
-<div class="bg_panel" style="display: none" id="cacuPanel">
-    <div class="panel panel-max">
-        <div class="close" id="cacuClose"></div>
-        <div class="padding-box clear">
-            <div class="data fl">
-                <div class="title">收益计算器</div>
-                <table>
-                    <tr><td>投资期限：</td><td><span id="investCycle">${item.itemCycle}</span><#if item.itemCycleUnit == 1>天<#elseif item.itemCycleUnit == 2>月<#elseif item.itemCycleUnit == 3>季<#elseif item.itemCycleUnit == 4>年</#if></td></tr>
-                    <tr><td>年化利率：</td><td id="investRate">${item.itemRate+item.itemAddRate}%</td></tr>
-                    <tr><td>还款方式：</td><td id="repayMethod"><#if item.itemRepayMethod == 1>一次性还款<#elseif item.itemRepayMethod == 2>等额本息<#elseif item.itemRepayMethod == 3>先息后本<#elseif item.itemRepayMethod == 4>每日付息</#if></td></tr>
-                    <tr><td>投资金额：</td><td  class="input_text"><input id='investMoneyCalcu' type="number" ></td></tr>
-                </table>
-                <div class="cacu_button">
-                    <input id='cacu' class='cacu' type="button" value="计算">
-                    <input id='reset' class='reset' type="button" value="重置">
-                </div>
-            </div>
-            <div class="result fl">
-                <div class="title">计算结果</div>
-            <#if item.itemType == 2>
-                <table>
-                    <tr><td>每期利息：</td><td><strong id="everyIntrerst_2"></strong>元</td></tr>
-                    <tr><td>末期本息：</td><td><strong id="lastIntrerst_2"></strong>元</td></tr>
-                    <tr><td>本息合计：</td><td><strong id="total_2"></strong>元</td></tr>
-                </table>
-            <#elseif item.itemType == 1>
-                <table>
-                    <tr><td>每期本息：</td><td><strong id="intrerst_1"></strong>元</td></tr>
-                    <tr><td>本息合计：</td><td><strong id="total_1"></strong>元</td></tr>
-                </table>
-            <#else>
-                <table>
-                    <tr><td>利息收入：</td><td><strong id="intrerst_3"></strong>元</td></tr>
-                    <tr><td>本息合计：</td><td><strong id="total_3"></strong>元</td></tr>
-                </table>
-            </#if>
-                <div class="text">
-                    注：30天为1期，计算结果仅作参
-                    考，最终以实际收益为准
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <input type="hidden" value="${item.id?c}" id="itemId"/>
 </body>
